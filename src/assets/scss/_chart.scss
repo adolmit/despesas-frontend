@@ -1,0 +1,71 @@
+.chart {
+  font-size: 1.1rem;
+  width: 100%;
+}
+
+.chart_bar {
+  border: 1px solid #585757;
+
+  .label-axis-tick {
+    font-size: 0.5rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    text-align: left;
+    fill: #585757;
+  }
+  .label-bar-value {
+    font-size: 0.5rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    text-align: left;
+    fill: rgb(53, 52, 52);
+  }
+}
+
+.chart_line {
+  border: 1px solid #585757;
+
+  .label-axis-tick {
+    font-size: 0.3rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    text-align: left;
+    fill: #585757;
+  }
+
+  .label-bar-value {
+    font-size: 0.5rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    text-align: left;
+    fill: rgb(53, 52, 52);
+  }
+
+  .line-axis-y {
+    fill: #585757;
+    stroke: #585757;
+    stroke-width: 0.5;
+  }
+}
+
+.grid line {
+  stroke: rgb(126, 185, 249);
+  stroke-opacity: 0.8;
+  stroke-width: 0.2;
+}
+
+.grid path {
+  stroke-width: 0;
+}

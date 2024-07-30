@@ -1,0 +1,49 @@
+.siaf {
+	&-white {
+        color: $siaf-white;
+    }
+    &-black {
+        color: $siaf-black;
+    }
+    &-red {
+        color: $siaf-red;
+        &-dark {
+            color: $siaf-red-dark;
+        }
+        &-ligth {
+            color: $siaf-red-ligth;
+        }
+    }
+    &-grey {
+        &-10 {
+            color: $siaf-grey-10;
+        }
+        &-20 {
+            color: $siaf-grey-20;
+        }
+        &-30 {
+            color: $siaf-grey-30;
+        }
+        &-40 {
+            color: $siaf-grey-40;
+        }
+    }
+    &-green {
+        color: $siaf-green;
+        &-luz {
+            color: $siaf-green-ligth;
+        }
+    }
+    &-blue {
+        color: $siaf-blue;
+        &-luz {
+            color: $siaf-blue-ligth;
+        }
+    }
+    &-orange {
+        color: $siaf-orange;
+        &-luz {
+            color: $siaf-orange-ligth;
+        }
+    }
+}

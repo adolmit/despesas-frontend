@@ -1,0 +1,119 @@
+$color-active-row: #ffcdd2;
+$color-hover-row: #ffebee;
+$spacio-separacion: 1.125rem;
+
+.rounded-top-0 {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.siaf {
+	.nav-tabs {
+		@extend .border-bottom;
+	}
+}
+
+.siaf .acc-body-padding-0 {
+	.accordion-body {
+		padding: 0 !important;
+	}
+}
+
+.siaf .modal {
+	&-title {
+		font-size: 1.18rem;
+		text-transform: uppercase;
+	}
+	&-footer {
+		padding: 1rem;
+
+		.btn {
+			margin: 0;
+			&:not(:last-child) {
+				margin-right: 0.5rem;
+			}
+		}
+	}
+}
+
+.nsrtm {
+	ngb-accordion {
+		.accordion-body {
+			padding: 1rem !important;
+		}
+		.accordion-header .accordion-button {
+			padding: 1rem !important;
+		}
+		.title {
+			text-transform: uppercase;
+		}
+	}
+
+	// padding to body accordion with 0
+	ngb-accordion.body-p-0 {
+		.accordion-body {
+			padding: 0 !important;
+		}
+	}
+	ng-select {
+		.ng-placeholder {
+			text-transform: uppercase !important;
+		}
+	}
+
+	input.form-control::placeholder {
+		text-transform: uppercase !important;
+	}
+
+	// .table thead tr > th {
+	// 	text-transform: uppercase !important;
+	// 	line-height: 1 !important;
+	// }
+
+	.required {
+		label::after {
+			position: absolute;
+		}
+	}
+
+	.form-check-input:not(:checked) {
+		border-color: #bdbdbd;
+		background-color: #f5f5f5;
+	}
+
+	.form-icon {
+		background-image: url("//apps2desa.mineco.gob.pe/nsrtmvehicular/assets/images/icon-search.svg"),
+			url("//localhost:60903/assets/images/icon-search.svg");
+
+		&.calendar {
+			background-image: url("//apps2desa.mineco.gob.pe/nsrtmvehicular/assets/images/icon-calendar.svg"),
+				url("//localhost:60903/assets/images/icon-calendar.svg");
+		}
+
+		&.search {
+			background-image: url("//apps2desa.mineco.gob.pe/nsrtmvehicular/assets/images/icon-search.svg"),
+				url("//localhost:60903/assets/images/icon-search.svg");
+		}
+	}
+
+	.pagination .page-item.disabled .page-link {
+		background-color: transparent !important;
+	}
+
+	.pagination .page-link {
+		padding-right: 0.5rem !important;
+		padding-left: 0.5rem !important;
+	}
+
+	.dropdown-toggle.btn-icon::after {
+		// width: 38px;
+		display: none;
+	}
+	.nav-tabs li {
+		min-width: auto;
+	}
+}
+
+.no-click {
+	pointer-events: none;
+}

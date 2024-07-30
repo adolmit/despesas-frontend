@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/scss/project";
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~bootstrap/scss/bootstrap";
+
+// // ======================================
+
+// // ======== 2. CONFIG TO SIAF ==========
+@import "assets/icons/css/iconfont.localhost.css";
+
+body {
+  font-family: "Calibri", Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+// // ======================================
+
+// // ========= 3. STYLES MY PROJECT ==========
+
+// // =========================================

@@ -1,0 +1,48 @@
+<div class="table-responsive overflow-hidden">
+  <div
+    class="table-sticky"
+    [ngClass]="{
+      'table-sticky table-sticky--height': datasource.length > 10
+    }"
+  >
+    <table
+      class="table table-consult m-0 head-no-rounded"
+      aria-describedby="gridTbl"
+    >
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">ANIO</th>
+          <th scope="col">MES</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!loading">
+        <tr
+          class="c-inherit"
+          *ngFor="let item of datasource"
+          [ngClass]="{
+            active: item._id === itemId
+          }"
+          (click)="onSeleccionarFila(item)"
+        >
+          <td>{{ item._id }}</td>
+          <td>{{ item.ano_movimentacao }}</td>
+          <td>{{ item.mes_movimentacao }}</td>
+        </tr>
+        <tr *ngIf="!datasource.length">
+          <td colspan="8">Nao tem resultados</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-container *ngIf="loading"> Loading </ng-container>
+  </div>
+</div>
+<!-- PAGINATE -->
+<table-footer-pagination
+  [totalItems]="totalItems"
+  [totalItemsPerPage]="datasource.length"
+  (changePaginate)="onChangePaginate($event)"
+  [page]="page"
+  [pageSize]="pageSize"
+></table-footer-pagination>

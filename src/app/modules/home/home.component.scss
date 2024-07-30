@@ -1,0 +1,31 @@
+.content-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #616161;
+  border: 1px solid #616161;
+  //fone landscape
+  @media (min-width: 50rem) {
+    font-size: 1.3rem;
+  }
+  //tablets portrait
+  @media (min-width: 76.8rem) {
+    font-size: 1.4rem;
+  }
+  //tablet landscape
+  @media (min-width: 102.4rem) {
+  }
+  //monitor
+  @media (min-width: 160rem) {
+  }
+}

@@ -1,0 +1,117 @@
+<div class="frame-layout">
+  <div class="frame-layout__header py-content">
+    <div class="container-fluid px-0 g-0">
+      <div class="row">
+        <div class="col-12 mb-1">
+          <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+        </div>
+      </div>
+      <topbar
+        [titulo]="'Despesas orçamentárias - 2017'"
+        subtitulo=""
+        [showCancel]="false"
+        [isLocalRoute]="false"
+        [toUrl]="''"
+      >
+      </topbar>
+    </div>
+  </div>
+  <div class="frame-layout__body">
+    <div class="siaf-card p-3 mb-component">
+      <ul
+        ngbNav
+        #navResources="ngbNav"
+        [(activeId)]="tabActivo"
+        class="nav-tabs d-flex flex-nowrap mb-3"
+      >
+        <li [ngbNavItem]="TABS.SEARCH" [destroyOnHide]="false">
+          <a ngbNavLink ngbTooltip="Activos" placement="bottom">
+            <span class="feather icon-file-text icon-md"></span>
+            <span class="ms-1">Explorados de dados</span>
+          </a>
+          <ng-template ngbNavContent>
+            <app-table-expense
+              [datasource]="records"
+              [loading]="loading"
+              [totalItems]="totalItems"
+              [page]="page!"
+              [pageSize]="pageSize!"
+              [rowSelected]="selectedItem"
+              (selected)="onSelectedItem($event)"
+              (paginar)="onChangePaginacion($event)"
+            ></app-table-expense>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="TABS.GRAPH1">
+          <a ngbNavLink ngbTooltip="Despesas por mes" placement="bottom">
+            <span class="feather icon-file-text icon-md"></span>
+            <span class="ms-1">Despesas por mes</span>
+          </a>
+          <ng-template ngbNavContent>
+            <div class="content-charts">
+              <div class="indicador-chart">
+                <app-bar-chart
+                  [id]="1"
+                  [data]="data"
+                  [axisYLabel]="'TitleY'"
+                  [axisYLineShow]="false"
+                  [axisYLabelShow]="false"
+                  [axisYDataShow]="true"
+                  [axisXLabel]="'TitleX'"
+                  [axisXLineShow]="true"
+                  [axisXLabelShow]="false"
+                  [axisXDataShow]="true"
+                  [axisXBase]="24"
+                  [tooltipShow]="false"
+                  [tooltipRound]="2"
+                  [lineMeanShow]="false"
+                  [lineMeanRound]="2"
+                  [legendShow]="false"
+                  [orientation]="'horizontal'"
+                  [barColor]="'#007bff'"
+                >
+                </app-bar-chart>
+              </div>
+              <div class="data">
+                <app-donut-chart
+                  [data]="dataDonut"
+                  [mainData]=""
+                ></app-donut-chart>
+              </div>
+              <div class="indicador-chart">
+                <app-line-chart
+                  [id]="1"
+                  [data]="dataLine"
+                  [axisYLabel]="'TitleY'"
+                  [axisYLineShow]="true"
+                  [axisYLabelShow]="false"
+                  [axisYDataShow]="true"
+                  [axisXLabel]="'TitleX'"
+                  [axisXLineShow]="true"
+                  [axisXLabelShow]="false"
+                  [axisXDataShow]="true"
+                >
+                </app-line-chart>
+              </div>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="TABS.GRAPH2">
+          <a ngbNavLink ngbTooltip="Despesas por categoria" placement="bottom">
+            <span class="feather icon-file-text icon-md"></span>
+            <span class="ms-1">Despesas por categoria</span>
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+        <li [ngbNavItem]="TABS.GRAPH3">
+          <a ngbNavLink ngbTooltip="Despesas por fonte" placement="bottom">
+            <span class="feather icon-file-text icon-md"></span>
+            <span class="ms-1">Despesas por fonte</span>
+          </a>
+          <ng-template ngbNavContent> </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="navResources"></div>
+    </div>
+  </div>
+</div>

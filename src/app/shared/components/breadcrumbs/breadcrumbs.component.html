@@ -1,0 +1,18 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb py-0">
+    <ng-container *ngFor="let breadcrumb of breadcrumbs">
+      <li class="breadcrumb-item" [ngClass]="{ active: breadcrumb.active }">
+        <ng-container *ngIf="hasUrl(breadcrumb.url); else noUrl">
+          <a
+            [routerLink]="[breadcrumb.url]"
+            [attr.aria-current]="breadcrumb.active ? 'page' : ''"
+            >{{ breadcrumb.nombre }}</a
+          >
+        </ng-container>
+        <ng-template #noUrl>
+          <span>{{ breadcrumb.nombre }}</span>
+        </ng-template>
+      </li>
+    </ng-container>
+  </ol>
+</nav>
