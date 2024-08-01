@@ -1,0 +1,55 @@
+<div class="section">
+  <div class="header">
+    <div class="options">
+      <div
+        class="btn btn-icon btn-outline-secondary"
+        (mousedown)="startZoomIn($event)"
+        (mouseup)="endZoomIn($event)"
+        (mousemove)="moveZoomIn($event)"
+      >
+        <span class="feather icon-zoom-in icon-md"></span>
+      </div>
+      <div
+        class="btn btn-icon btn-outline-secondary"
+        (mousedown)="startZoomOut($event)"
+        (mouseup)="endZoomOut($event)"
+        (mousemove)="moveZoomOut($event)"
+      >
+        <span class="feather icon-zoom-out icon-md"></span>
+      </div>
+      <div
+        class="btn btn-icon btn-outline-secondary"
+        (mousedown)="startPanRight($event)"
+        (mouseup)="endPanRight($event)"
+        (mousemove)="movePanRight($event)"
+      >
+        <span class="feather icon-arrow-left icon-md"></span>
+      </div>
+      <div
+        class="btn btn-icon btn-outline-secondary"
+        (mousedown)="startPanLeft($event)"
+        (mouseup)="endPanLeft($event)"
+        (mousemove)="movePanLeft($event)"
+      >
+        <span class="feather icon-arrow-right icon-md"></span>
+      </div>
+      <div
+        class="btn btn-icon btn-outline-secondary"
+        (mousedown)="startPanUp($event)"
+        (mouseup)="endPanUp($event)"
+        (mousemove)="movePanUp($event)"
+      >
+        <span class="feather icon-arrow-up icon-md"></span>
+      </div>
+      <div
+        class="btn btn-icon btn-outline-secondary"
+        (mousedown)="startPanDown($event)"
+        (mouseup)="endPanDown($event)"
+        (mousemove)="movePanDown($event)"
+      >
+        <span class="feather icon-arrow-down icon-md"></span>
+      </div>
+    </div>
+  </div>
+  <div id="chart_{{ id }}" class="chart chart_bar"></div>
+</div>

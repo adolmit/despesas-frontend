@@ -1,0 +1,10 @@
+.siaf-card {
+  box-shadow: $box-shadow;
+  background-color: $siaf-white;
+  border-radius: $border-radius-lg;
+  &-header {
+    display: flex;
+    align-items: center;
+    min-height: 45px;
+  }
+}

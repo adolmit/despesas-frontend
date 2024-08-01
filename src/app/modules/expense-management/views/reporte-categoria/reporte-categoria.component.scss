@@ -1,0 +1,13 @@
+.content-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.donut {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

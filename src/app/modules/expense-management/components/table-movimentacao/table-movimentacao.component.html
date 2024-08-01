@@ -1,0 +1,66 @@
+<div class="table-responsive overflow-hidden">
+  <div
+    class="table-sticky"
+    [ngClass]="{
+      'table-sticky table-sticky--height': datasource.length > 10
+    }"
+  >
+    <table
+      class="table table-consult m-0 head-no-rounded"
+      aria-describedby="gridTbl"
+    >
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">ANIO</th>
+          <th scope="col">MES</th>
+          <th scope="col">ID CATEGORIA</th>
+          <th scope="col">CATEGORIA</th>
+          <th scope="col">ID ORGAO</th>
+          <th scope="col">ORGAO</th>
+          <th scope="col">ID MODALIDADE</th>
+          <th scope="col">MODALIDADE</th>
+          <th scope="col">ID FONTE</th>
+          <th scope="col">FONTE</th>
+          <th scope="col">VALOR DESPESA</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!loading">
+        <tr
+          class="c-inherit"
+          *ngFor="let item of datasource"
+          [ngClass]="{
+            active: item.id === itemId
+          }"
+          (click)="onSeleccionarFila(item)"
+        >
+          <td>{{ item.id }}</td>
+          <td>{{ item.ano }}</td>
+          <td>{{ item.mes }}</td>
+          <td>{{ item.categoria.id }}</td>
+          <td>{{ item.categoria.nome }}</td>
+          <td>{{ item.orgao.id }}</td>
+          <td>{{ item.orgao.nome }}</td>
+          <td>{{ item.modalidade.id }}</td>
+          <td>{{ item.modalidade.nome }}</td>
+          <td>{{ item.fonte.id }}</td>
+          <td>{{ item.fonte.nome }}</td>
+          <td>{{ item.valor }}</td>
+        </tr>
+        <tr *ngIf="!datasource.length">
+          <td colspan="8">Nao tem resultados</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-container *ngIf="loading"> Loading </ng-container>
+  </div>
+</div>
+<!-- PAGINATE -->
+<table-footer-pagination
+  [totalItems]="totalItems"
+  [totalItemsPerPage]="datasource.length"
+  (changePaginate)="onChangePaginate($event)"
+  [page]="page"
+  [pageSize]="pageSize"
+></table-footer-pagination>

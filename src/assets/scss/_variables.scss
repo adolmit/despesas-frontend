@@ -1,0 +1,105 @@
+// Colores
+$siaf-black: #141415;
+$siaf-white: #ffffff;
+$siaf-red: #ED3237;
+$siaf-red-dark: #CF2C30;
+$siaf-red-ligth: #FFD6D7;
+$siaf-orange: #F59E3F;
+$siaf-orange-ligth: #FEF3E7;
+$siaf-green: #93C249;
+$siaf-green-ligth: #F2F7E8;
+$siaf-blue: #0594B9;
+$siaf-blue-ligth: #E0F2F6;
+$siaf-grey-10: #F5F6FA;
+$siaf-grey-20: #D2D3D5;
+$siaf-grey-30: #828283;
+$siaf-grey-40: #373739;
+// Espaciado
+$siaf-extra-small:              8px;
+$siaf-small:                    16px;
+$siaf-small-extra:              24px;
+$siaf-medium:                   32px;
+$siaf-medium-large:             40px;
+$siaf-large:                    72px;
+// Botones
+$siaf-btn-small:                28px;
+$siaf-btn-regular:              32px;
+$siaf-btn-large:                38px;
+// Configuración bootstrap 5
+$theme-colors: (
+  "primary":    $siaf-red,
+  "secondary":  $siaf-grey-10,
+  "success":    $siaf-green,
+  "info":       $siaf-blue,
+  "warning":    $siaf-orange,
+  "danger":     $siaf-red,
+);
+// Breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 1100px,
+  xl: 1200px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 960px,
+  lg: 960px,
+  xl: 1100px
+);
+// Colores
+$success:                   	$siaf-green;
+$info:          				      $siaf-blue;
+$warning:       				      $siaf-orange;
+$danger:        				      $siaf-red;
+// Radio, Checkbox, Switch
+$form-check-input-checked-bg-color:       $siaf-red;
+$form-check-input-checked-border-color:   $form-check-input-checked-bg-color;
+// Texto
+$font-size-base:               .875rem;
+$text-muted:                   $siaf-grey-30;
+// Navs
+$nav-link-padding-y:           .344rem;
+// Border
+$border-radius:                4px;
+$border-radius-sm:             6px;
+$border-radius-lg:             8px;
+$border-color:                 $siaf-grey-10;
+$border-radius-badge:          50px;
+// Shadow
+$component-active-bg:          $siaf-red;
+$box-shadow:                   0px 1px 5px rgba(0, 0, 0, 0.1);
+$box-shadow-sm:                0px 3px 7px rgba(0, 0, 0, 0.08);
+$box-shadow-lg:                0px 10px 15px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.05);
+// Hr
+$hr-border-color:              $siaf-grey-10;
+// Tables
+$table-cell-padding:           .55rem;
+$table-cell-padding-sm:        .3rem;
+$table-color:                  $siaf-black;
+$table-th-font-weight:         400;
+// Input
+$input-border-color:           $siaf-grey-20 !important;
+$input-disabled-bg:            $siaf-grey-10;
+$input-placeholder-color:      $siaf-grey-30;
+
+$input-border-radius:          $border-radius;
+$input-border-radius-lg:       $border-radius;
+$input-border-radius-sm:       $border-radius;
+
+$input-height: 				         32px;
+$input-height-sm: 			       28px;
+$input-height-lg: 			       38px;
+
+$input-font-size: 			       14px;
+$input-font-size-sm: 		       14px;
+$input-font-size-lg: 		       16px;
+// Dropdown
+$dropdown-divider-bg:          $siaf-grey-10;
+// Buttons
+$btn-link-color:               $siaf-red;
+$btn-link-hover-color:         $siaf-red-dark;
+// Link
+$link-color:                   $siaf-red;

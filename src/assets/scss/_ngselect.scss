@@ -1,0 +1,83 @@
+.siaf {
+  .ng-dropdown-panel {
+    box-shadow: $box-shadow-lg;
+    .ng-dropdown-panel-items {
+      max-height: 222px;
+    }
+    .ng-option {
+      &.ng-option-marked {
+        background-color: $siaf-grey-10;
+      }
+      &.ng-option-selected {
+        color: $siaf-red !important;
+        background-color: $siaf-red-ligth !important;
+      }
+    }
+  }
+  .ng-select {
+    .ng-select-container {
+      font-size: 14px;
+      height: 32px !important;
+      min-height: 32px;
+      color: $siaf-black;
+      border: 1px solid $siaf-grey-20;
+      .ng-arrow {
+        border-color: $siaf-grey-30 transparent transparent;
+      }
+    }
+    &.ng-select-opened .ng-arrow {
+      border-color: transparent transparent $siaf-grey-30;
+    }
+    .ng-dropdown-panel {
+      box-shadow: $box-shadow-lg;
+      .ng-dropdown-panel-items {
+        max-height: 222px;
+      }
+      .ng-option {
+        &.ng-option-marked {
+          background-color: $siaf-grey-10;
+        }
+        &.ng-option-selected {
+          color: $siaf-red !important;
+          background-color: $siaf-red-ligth !important;
+        }
+      }
+    }
+    &.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+      border: 1px solid $siaf-green;
+      box-shadow: 0 0 0 3px $siaf-green-ligth;
+    }
+    &.ng-invalid {
+      .ng-select-container {
+        border-color: $siaf-red;
+      }
+      &.ng-untouched {
+        .ng-select-container {
+          border-color: $siaf-grey-20;
+        }
+      }
+    }
+    &.ng-select-disabled > .ng-select-container {
+      border: none;
+      box-shadow: none;
+      background-color: $siaf-grey-10;
+      color: $siaf-grey-20;
+      .ng-arrow {
+        border-color: $siaf-grey-20 transparent transparent;
+      }
+    }
+  }
+  .left {
+    .ng-select-container {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  .rigth {
+    .ng-select-container {
+      border-left: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<div class="frame-layout">
+  <div class="frame-layout__header py-content">
+    <div class="container-fluid px-0 g-0">
+      <div class="row">
+        <div class="col-12 mb-1">
+          <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+        </div>
+      </div>
+      <topbar
+        [titulo]="'Despesas orçamentárias - 2017'"
+        subtitulo=""
+        [showCancel]="false"
+        [isLocalRoute]="false"
+        [toUrl]="''"
+      >
+      </topbar>
+    </div>
+  </div>
+  <div class="frame-layout__body">
+    <div class="siaf-card p-3 mb-component">
+      <ul
+        ngbNav
+        #navResources="ngbNav"
+        [(activeId)]="tabActivo"
+        class="nav-tabs d-flex flex-nowrap mb-3"
+      >
+        <li [ngbNavItem]="TABS.BUSQUEDA" [destroyOnHide]="false">
+          <a ngbNavLink ngbTooltip="Activos" placement="bottom">
+            <span class="feather icon-file-text icon-md"></span>
+            <span class="ms-1">Explorados de dados</span>
+          </a>
+          <ng-template ngbNavContent>
+            <app-table-movimentacao
+              [datasource]="data"
+              [loading]="loading"
+              [totalItems]="totalItems"
+              [page]="page!"
+              [pageSize]="pageSize!"
+              [rowSelected]="selectedItem"
+              (selected)="onSelectedItem($event)"
+              (paginar)="onChangePaginacion($event)"
+            ></app-table-movimentacao>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="TABS.RELATORIO_MES">
+          <a ngbNavLink ngbTooltip="Despesas por mes" placement="bottom">
+            <span class="feather icon-file-text icon-md"></span>
+            <span class="ms-1">Despesas por mes</span>
+          </a>
+          <ng-template ngbNavContent>
+            <app-reporte-mes></app-reporte-mes>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="TABS.RELATORIO_CATEGORIA">
+          <a ngbNavLink ngbTooltip="Despesas por categoria" placement="bottom">
+            <span class="feather icon-file-text icon-md"></span>
+            <span class="ms-1">Despesas por categoria</span>
+          </a>
+          <ng-template ngbNavContent>
+            <app-reporte-categoria></app-reporte-categoria>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="TABS.RELATORIO_FONTE">
+          <a ngbNavLink ngbTooltip="Despesas por fonte" placement="bottom">
+            <span class="feather icon-file-text icon-md"></span>
+            <span class="ms-1">Despesas por fonte</span>
+          </a>
+          <ng-template ngbNavContent>
+            <app-reporte-fonte></app-reporte-fonte>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="navResources"></div>
+    </div>
+  </div>
+</div>
