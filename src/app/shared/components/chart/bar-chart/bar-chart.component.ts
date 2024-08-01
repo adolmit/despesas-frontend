@@ -112,13 +112,13 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnChanges {
     this.marginTop = 50;
     this.marginRight = 70;
     this.marginBottom = 50;
-    this.marginLeft = 180;
+    this.marginLeft = 200;
 
     this.axisYLineShow = true;
     this.axisYDataShow = true;
     this.axisYLabel = 'Label axis Y';
     this.axisYLabelMarginTop = 139;
-    this.axisYLabelMarginLeft = 200;
+    this.axisYLabelMarginLeft = 210;
     this.axisYMarginTop = 168.5;
     this.axisYMarginLeft = 395.5;
     this.axisYLineClass = 'line-axis-y';
@@ -236,7 +236,6 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnChanges {
         if (!this.endPanRight) clearInterval(this.intervalPanRight);
       });
 
-    console.log(this.id);
     this.svg = d3
       .select('#chart_' + this.id)
       .append('svg')
@@ -494,7 +493,6 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnChanges {
 
   responsivefy(svg) {
     // get container + svg aspect ratio
-    console.log(svg);
     var container = d3.select(svg.node().parentNode),
       width = parseInt(svg.style('width')),
       height = parseInt(svg.style('height')),
@@ -521,7 +519,6 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnChanges {
 
   drawAxisX(showLine, showTitle, showLabels) {
     const xAxis = d3.axisBottom(this.x);
-    console.log('show', showLine);
     if (showLine) {
     }
 
@@ -567,7 +564,6 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnChanges {
 
   drawAxisY(showLine, showTitle, showLabels) {
     const yAxis = d3.axisLeft(this.y);
-    //console.log("drawAxisY");
     let xMin = d3.min(this.data, (d) => d.x);
     xMin = Math.min(0, xMin);
     if (showLine) {

@@ -1,0 +1,50 @@
+<div class="content-charts">
+  <div *ngIf="dataBar.length > 0">
+    <app-bar-chart
+      [id]="1"
+      [data]="dataBar"
+      [axisYLabel]="'TitleY'"
+      [axisYLineShow]="false"
+      [axisYLabelShow]="false"
+      [axisYDataShow]="true"
+      [axisXLabel]="'TitleX'"
+      [axisXLineShow]="true"
+      [axisXLabelShow]="false"
+      [axisXDataShow]="true"
+      [axisXBase]="24"
+      [tooltipShow]="false"
+      [tooltipRound]="2"
+      [lineMeanShow]="false"
+      [lineMeanRound]="2"
+      [legendShow]="false"
+      [orientation]="'horizontal'"
+      [barColor]="'#007bff'"
+    >
+    </app-bar-chart>
+  </div>
+  <div *ngIf="dataDonut.length > 0">
+    <app-donut-chart
+      [id]="1"
+      [data]="dataDonut"
+      [mainData]=""
+      [legendShow]="true"
+      [legendNames]="legendNames"
+      [legendColors]="legendColors"
+      [legendOrientation]="'VERTICAL'"
+    ></app-donut-chart>
+  </div>
+  <div *ngIf="dataLine.length > 0">
+    <app-line-chart
+      [id]="1"
+      [data]="dataLine"
+      [axisYLabel]="'TitleY'"
+      [axisYLineShow]="true"
+      [axisYLabelShow]="false"
+      [axisYDataShow]="true"
+      [axisXLabel]="'TitleX'"
+      [axisXLineShow]="true"
+      [axisXLabelShow]="false"
+      [axisXDataShow]="true"
+    ></app-line-chart>
+  </div>
+</div>

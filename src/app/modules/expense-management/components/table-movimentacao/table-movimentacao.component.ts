@@ -1,24 +1,22 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ExpenseTable } from '../../model/expense';
-import { DataRecord } from 'src/app/core/models/result';
 import { IChangePaginate } from 'src/app/shared/components/table-footer-pagination/table-footer-pagination.component';
+import { MovimentacaoTable } from '../../models/movimentacao';
 
 @Component({
-  selector: 'app-table-expense',
-  templateUrl: './table-expense.component.html',
-  styleUrls: ['./table-expense.component.scss'],
+  selector: 'app-table-movimentacao',
+  templateUrl: './table-movimentacao.component.html',
+  styleUrls: ['./table-movimentacao.component.scss'],
 })
-export class TableExpenseComponent implements OnInit {
-  @Input() datasource: ExpenseTable[];
-
+export class TableMovimentacaoComponent implements OnInit {
+  @Input() datasource: MovimentacaoTable[];
   @Input() totalItems = 0;
   @Input() page = 1;
   @Input() pageSize = 10;
 
   @Input() loading: boolean = false;
-  @Input() rowSelected: ExpenseTable | null = null;
+  @Input() rowSelected: MovimentacaoTable | null = null;
 
-  @Output() selected = new EventEmitter<ExpenseTable>();
+  @Output() selected = new EventEmitter<MovimentacaoTable>();
   @Output() paginar = new EventEmitter<IChangePaginate>();
 
   ngOnInit(): void {
@@ -28,7 +26,7 @@ export class TableExpenseComponent implements OnInit {
      */
   }
 
-  onSeleccionarFila(fila: ExpenseTable) {
+  onSeleccionarFila(fila: MovimentacaoTable) {
     this.selected.emit(fila);
   }
 
@@ -47,6 +45,6 @@ export class TableExpenseComponent implements OnInit {
   }
 
   get itemId() {
-    return Number(this.rowSelected?._id ?? 0);
+    return Number(this.rowSelected?.id ?? 0);
   }
 }

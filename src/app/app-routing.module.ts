@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { CONSTANTS } from './core/constants/constants';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/expense-management', pathMatch: 'full' },
   {
-    path: CONSTANTS.HOME_ROUTE.path,
+    path: CONSTANTS.EXPENSE_MANAGEMENT_ROUTE.path,
     loadChildren: () =>
-      import('./modules/home/home.module').then((m) => m.HomeModule),
+      import('./modules/expense-management/expense-management.module').then(
+        (m) => m.ExpenseManagementModule
+      ),
   },
 ];
 

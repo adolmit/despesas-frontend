@@ -1,6 +1,48 @@
 export class CONSTANTS {
-  public static HOME_ROUTE = {
-    label: 'Home',
-    path: 'home',
+  public static RECIFE_ROUTE = {
+    label: 'Recife',
+    path: 'recife',
   };
+  public static EXPENSE_MANAGEMENT_ROUTE = {
+    label: 'Gestão de despesas',
+    path: 'expense-management',
+  };
+  public static COLORS = [
+    '#ff1744',
+    '#00b0ff',
+    '#d500f9',
+    '#651fff',
+    '#3d5afe',
+    '#2979ff',
+    '#f50057',
+    '#00e5ff',
+    '#1de9b6',
+    '#00e676',
+    '#76ff03',
+    '#eeff41',
+    '#ffea00',
+    '#ffc400',
+    '#ff9100',
+    '#dd2c00',
+    '#4e342e',
+    '#212121',
+    '#263238',
+    '#ffebee',
+    '#fce4ec',
+    '#f3e5f5',
+    '#ede7f6',
+    '#e8eaf6',
+    '#e3f2fd',
+    '#e1f5fe',
+    '#e0f7fa',
+    '#e0f2f1',
+    '#e8f5e9',
+    '#f1f8e9',
+    '#f9fbe7',
+    '#fffde7',
+    '#ffecb3',
+    '#ffe0b2',
+    '#ffccbc',
+    '#efebe9',
+  ];
 }

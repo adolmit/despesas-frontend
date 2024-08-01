@@ -2,10 +2,9 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  ViewChild,
   Input,
-  ElementRef,
   SimpleChanges,
+  HostListener,
 } from '@angular/core';
 import * as d3 from 'd3';
 @Component({
@@ -51,6 +50,16 @@ export class LineChartComponent implements OnInit {
   private axisXLabelClass: any;
   private axisXLabelTickClass: any;
 
+  @Input()
+  private tooltipShow: any;
+  private tooltipOpacity: any;
+  private tooltipDurationMouseOver: any;
+  private tooltipDurationMouseOut: any;
+  private tooltipClass: any;
+
+  private screenHeight: number;
+  private screenWidth: number;
+
   private barBandWidth: any;
   private barBandSteps: any;
 
@@ -61,13 +70,24 @@ export class LineChartComponent implements OnInit {
   x: any;
   y: any;
 
+  tipBox: any;
+  tooltip: any;
+  tooltipLine: any;
+  pointSelected: number;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+  }
+
   constructor() {
     this.width = 800;
-    this.height = 300;
+    this.height = 450;
     this.marginTop = 50;
     this.marginRight = 70;
     this.marginBottom = 50;
-    this.marginLeft = 80;
+    this.marginLeft = 180;
 
     this.axisYLineShow = true;
     this.axisYDataShow = true;
@@ -88,9 +108,24 @@ export class LineChartComponent implements OnInit {
 
     this.barBandWidth = 15;
     this.barBandSteps = 25;
+
+    this.tooltipShow = true;
+    this.tooltipOpacity = 0.8;
+    this.tooltipDurationMouseOver = 200;
+    this.tooltipDurationMouseOut = 500;
+    this.tooltipClass = 'chart_tooltip';
+    this.tooltip = d3
+      .select('body')
+      .append('div')
+      .attr('id', 'customTooltip')
+      .attr('class', this.tooltipClass)
+      .style('opacity', 0);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+  }
 
   ngAfterViewInit(): void {
     this.createChart();
@@ -109,6 +144,16 @@ export class LineChartComponent implements OnInit {
   }
 
   init() {
+    if (this.data.length < 5) {
+      this.barBandWidth = 55;
+      this.barBandSteps = 135;
+    }
+
+    if (this.data.length > 20) {
+      this.height += 120;
+      this.width += 100;
+    }
+
     const barBandPadding =
       (this.barBandSteps - this.barBandWidth) / this.barBandSteps;
     this.width =
@@ -119,7 +164,6 @@ export class LineChartComponent implements OnInit {
 
     this.innerWidth = this.width - this.marginLeft - this.marginRight;
     this.innerHeight = this.height - this.marginTop - this.marginBottom;
-    console.log('WIDHT', this.width, this.height);
     // svg
     this.svg = d3
       .select('#chart_line_' + this.id)
@@ -127,7 +171,7 @@ export class LineChartComponent implements OnInit {
       .attr('id', 'svg_line_' + this.id)
       .attr('viewBox', '0 0 ' + this.width + ' ' + this.height)
       .attr('width', '100%')
-      .attr('preserveAspectRatio', 'xMinYMid meet');
+      .attr('preserveAspectRatio', 'xMinYMin');
     //.call(this.zoom)
 
     this.svg.selectAll('*').remove();
@@ -142,26 +186,39 @@ export class LineChartComponent implements OnInit {
         'translate(' + this.marginLeft + ',' + this.marginTop + ')'
       );
 
-    let yMin = d3.min(this.data, (d) => d.y);
-    yMin = Math.min(yMin, 0);
-    const yMax = d3.max(this.data, (d) => d.y);
-    console.log('sss', yMin, yMax);
-    this.y = d3.scaleLinear().domain([yMin, yMax]).range([this.innerHeight, 0]);
+    let xMin = d3.min(this.data, (d) => d.x);
+    xMin = Math.min(xMin, 0);
+    const xMax = d3.max(this.data, (d) => d.x);
+    this.x = d3.scaleLinear().domain([xMin, xMax]).range([0, this.innerWidth]);
 
-    this.x = d3
+    this.y = d3
       .scaleBand()
-      .domain(this.data.map((d) => d.x))
-      .rangeRound([0, this.innerWidth])
+      .domain(this.data.map((d) => d.y))
+      .rangeRound([0, this.innerHeight])
       .padding(barBandPadding);
 
+    this.createTooltip(this.chart, this.x, this.data);
+
     // axis
-    this.drawAxisX(this.axisXLineShow, this.axisXLabelShow, this.axisXDataShow);
+
+    const xAxis = d3.axisBottom(this.x);
+    this.chart
+      .append('g')
+      .classed('axis-line', true)
+      .attr('transform', 'translate(0,' + this.innerHeight + ')')
+      .call(xAxis)
+      .selectAll('text')
+      .attr('transform', 'translate(-10,10)rotate(-30)')
+      .style('text-anchor', 'middle');
+
+    //this.drawAxisX(this.axisXLineShow, this.axisXLabelShow, this.axisXDataShow);
     this.drawAxisY(this.axisYLineShow, this.axisYLabelShow, this.axisYDataShow);
   }
 
   drawAxisX(showLine, showTitle, showLabels) {
     const xAxis = d3.axisBottom(this.x);
-    let yMin = d3.min(this.data, (d) => d.y);
+
+    let yMin = d3.min(this.data, (d) => d.x);
     yMin = Math.min(0, yMin);
 
     if (showLine) {
@@ -170,12 +227,7 @@ export class LineChartComponent implements OnInit {
         .attr('class', this.axisYLineClass)
         .attr('x1', this.marginLeft)
         .attr('y1', this.marginTop + this.innerHeight)
-        .attr(
-          'x2',
-          this.marginLeft +
-            this.innerWidth -
-            (this.barBandSteps - this.barBandWidth)
-        )
+        .attr('x2', this.marginLeft + this.innerWidth)
         .attr('y2', this.marginTop + this.innerHeight);
     }
 
@@ -197,19 +249,24 @@ export class LineChartComponent implements OnInit {
         .data(this.data)
         .enter()
         .append('text')
-        .attr('y', (d) => this.y(yMin) + 17)
-        .attr('x', (d) => this.x(d.x) + this.barBandWidth / 2)
-        .text((d) => d.x)
+        .attr('y', (d) => this.innerHeight + 17)
+        .attr('x', (d) => this.x(d.x))
+        .attr('transform', (d) => {
+          'translate(' +
+            this.x(d.x) +
+            ',' +
+            (this.innerHeight + 17) +
+            ') rotate(-45)';
+        })
+        .text((d, i) => (i % 5 == 0 ? d.x : ''))
         .attr('class', (d) => this.axisYLabelTickClass)
-        .attr('text-anchor', 'end')
-        .attr('alignment-baseline', 'central')
-        .attr('visibility', 'visible');
+
+        .attr('class', 'label-axis-tick');
     }
   }
 
   drawAxisY(showLine, showTitle, showLabels) {
     const yAxis = d3.axisLeft(this.y);
-    //console.log("drawAxisY");
     let xMin = d3.min(this.data, (d) => d.x);
     xMin = Math.min(0, xMin);
     if (showLine) {
@@ -244,7 +301,7 @@ export class LineChartComponent implements OnInit {
         .append('text')
         .attr('x', (d) => this.x(xMin) - 27)
         .attr('y', (d) => this.y(d.y))
-        .text((d) => d.y)
+        .text((d, i) => (this.data.length <= 12 ? d.y : i % 4 == 0 ? d.y : ''))
         .attr('class', (d) => this.axisYLabelTickClass)
         .attr('text-anchor', 'end')
         .attr('alignment-baseline', 'central')
@@ -346,5 +403,81 @@ export class LineChartComponent implements OnInit {
   // gridlines in y axis function
   make_y_gridlines() {
     return d3.axisLeft(this.y).ticks(5);
+  }
+
+  createTooltip(canvas, x, data) {
+    this.tooltipLine = canvas.append('g');
+    this.tooltipLine.append('line');
+
+    this.tipBox = canvas
+      .append('rect')
+      .attr('id', 'tipbox' + this.id)
+      .attr('width', this.innerWidth)
+      .attr('height', this.innerHeight)
+      .attr('transform', 'translate(0,0)')
+      .attr('opacity', 0)
+      .on('mousemove', (event) => this.drawTooltip(data, x, event))
+      .on('mouseout', () => this.removeTooltip(this.tooltip, this.tooltipLine));
+  }
+
+  removeTooltip(tooltip, tooltipLine) {
+    tooltip
+      .transition()
+      .duration(this.tooltipDurationMouseOut)
+      .style('opacity', 0);
+    if (tooltipLine) tooltipLine.attr('stroke', 'none');
+  }
+
+  setTooltipPosition(event) {
+    const { width: toolTipWidth, height: toolTipHeight } = this.tooltip
+      .node()
+      .getBoundingClientRect();
+
+    let toolTipX = event.pageX;
+    let toolTipY = event.pageY;
+
+    if (toolTipX + toolTipWidth > this.screenWidth) {
+      toolTipX -= toolTipWidth;
+    }
+
+    if (toolTipY + toolTipHeight > this.screenHeight) {
+      toolTipY -= toolTipHeight;
+    }
+
+    this.tooltip.style('left', `${toolTipX}px`).style('top', `${toolTipY}px`);
+  }
+
+  drawTooltip(datas, scaleX, event) {
+    let near;
+    let diff = this.innerWidth;
+    const pos = d3.pointer(event);
+    const x = pos[0];
+
+    const xPosition = scaleX.invert(x);
+
+    datas.forEach((d, index) => {
+      if (Math.abs(this.x(xPosition) - this.x(d.x)) < diff) {
+        diff = Math.abs(this.x(xPosition) - this.x(d.x));
+        near = d.x;
+        this.pointSelected = index;
+      }
+    });
+
+    this.tooltipLine
+      .selectAll('line')
+      .attr('class', 'axis-line')
+      .attr('x1', scaleX(near))
+      .attr('x2', scaleX(near))
+      .attr('y1', 0)
+      .attr('y2', this.innerHeight);
+
+    this.tooltip
+      .transition()
+      .duration(this.tooltipDurationMouseOver)
+      .style('opacity', this.tooltipOpacity);
+
+    const message = datas[this.pointSelected].tooltip;
+    this.tooltip.html(message);
+    this.setTooltipPosition(event);
   }
 }
